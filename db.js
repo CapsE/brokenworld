@@ -1,26 +1,47 @@
 var mongoose = require('mongoose');
 
-var schema = mongoose.Schema({value: String});
-var Values = mongoose.model('values', schema);
+var boni = mongoose.Schema({
+    Str:Number,
+    Sta:Number,
+    Acc:Number,
+    Dex:Number,
+    Wil:Number,
+    Int:Number,
+    Cha:Number,
+    Com:Number,
+    Ste:Number,
+    Per:Number
+});
+
+var schema = mongoose.Schema({name: String, img: String, description: String, boni:[boni]});
+var characterClasses = mongoose.model('character_classes', schema);
+
+var characterRaces = mongoose.model('character_races', schema);
 
 module.exports = {
     connectDB : function() {
         mongoose.connect(process.env.MONGODB_ADDON_URI);
     },
 
-    getVal : function(res) {
-        Values.find(function(err, result) {
+    getClasses : function(callback) {
+        characterClasses.find(function(err, result) {
             if (err) {
                 console.log(err);
                 res.send('database error');
                 return
             }
-            var values = {};
-            for (var i in result) {
-                var val = result[i];
-                values[val["_id"]] = val["value"]
+            callback(result);
+        });
+    },
+
+    getRaces : function(callback){
+        characterRaces.find(function(err, result){
+            if (err) {
+                console.log(err);
+                res.send('database error');
+                return
             }
-            res.render('index', {title: 'NodeJS MongoDB demo', values: values});
+            callback(result);
         });
     },
 

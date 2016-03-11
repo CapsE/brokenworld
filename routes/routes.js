@@ -1,11 +1,23 @@
 var express = require('express');
 var mongodb = require('../db');
+var ATTRIBUTES = require('../statics');
 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  mongodb.getVal(res);
+  mongodb.getClasses(function(result){
+    res.render('index', {title: 'Broken World', characterClasses: result});
+  });
+
+});
+
+router.get('/character-sheet', function(req, res){
+  mongodb.getClasses(function(classes){
+    mongodb.getRaces(function(races){
+      res.render('character-sheet', {title: 'Broken World', characterClasses: classes, characterRaces: races, attr:ATTRIBUTES});
+    });
+  });
 });
 
 router.post('/values', function(req, res) {

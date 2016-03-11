@@ -1,0 +1,44 @@
+body{
+
+}
+
+img{
+    height:300px;
+    max-width:100%;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+
+.description{
+    margin-left:auto;
+    margin-right:auto;
+    white-space: pre-wrap;
+}
+
+.attribute{
+    width:auto;
+    margin:4px;
+}
+
+.attribute small{
+    color:#337ab7;
+}
+
+.attribute-value{
+    width:60px;
+    padding-left:6px;
+    margin:2px;
+    display:inline;
+}
+
+.attribute-value.final{
+    margin-left:20px;
+    font-weight:bolder;
+    text-align: center;
+}
+
+.tooltip{
+    position:fixed;
+}
