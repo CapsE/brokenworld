@@ -6,39 +6,63 @@ extends layout
 block content
     script(src="/js/charactersheet.js")
 
-    div.col-md-5
-        div.races
-            h2
-                | Races
-            each race in characterRaces
-                button.race.btn-primary(data-boni="#{JSON.stringify(race.boni)}")
-                    | #{race.name}
-                    div.detail(style="display:none")
-                        img(src="#{race.img}")
-                        div.description
-                            p
-                                | #{race.description}
-        div.classes
-            h2
-                |Classes
-            each cc in characterClasses
-                button.cc.btn-primary
-                    | #{cc.name}
-                    div(style="display:none")
-                        img(src="#{cc.img}")
-                        div.description
-                            p
-                                | #{cc.description}
-    div.attributes.col-md-7
-        each attribute in attr.ATTRIBUTES
-            div.form-group.attribute
-                div.col-md-3
-                    label(data-toggle="tooltip" title="#{attribute.tooltip}" data-placement="right")
-                        |#{attribute.name}&nbsp;
-                        small
-                            |(#{attribute.name.substr(0,3)})
-                div.col-md-9
-                    input(class="form-control attribute-value #{attribute.name.substr(0,3)} basic" type="number"  value=3)
-                    input(class="form-control attribute-value #{attribute.name.substr(0,3)} bonus-1" type="number"  value=0 disabled="disabled")
-                    input(class="form-control attribute-value final" data-attr="#{attribute.name.substr(0,3)}" type="number"  disabled="disabled")
-            br
+    div.race-wrapper.section.col-md-12
+        div.col-md-4
+            div.races
+                h2
+                    | Races
+                each race in characterRaces
+                    div.choose
+                    button.race.btn-primary(data-boni="#{JSON.stringify(race.boni)}")
+                        | #{race.name}
+                        div.detail(style="display:none")
+                            img(src="#{race.img}")
+                            div.description
+                                p
+                                    |#{race.description}
+
+        div.attributes.col-md-5
+            each attribute in attr.ATTRIBUTES
+                div.form-group.attribute
+                    div.col-md-3
+                        label(data-toggle="tooltip" title="#{attribute.tooltip}" data-placement="right")
+                            |#{attribute.name}&nbsp;
+                            small
+                                |(#{attribute.name.substr(0,3)})
+                    div.col-md-9
+                        input(class="form-control attribute-value #{attribute.name.substr(0,3)} basic" type="number"  value=3)
+                        input(class="form-control attribute-value #{attribute.name.substr(0,3)} bonus-1" type="number"  value=0 disabled="disabled")
+                        input(class="form-control attribute-value final" data-attr="#{attribute.name.substr(0,3)}" type="number"  disabled="disabled")
+                br
+        div.preview.race-preview.col-md-3
+
+    div.class-wrapper.section.col-md-12
+        div.col-md-4
+            div.classes
+                h2
+                    |Classes
+                each cc in characterClasses
+                    button.cc.btn-primary
+                        |#{cc.name}
+                        div(style="display:none")
+                            img(src="#{cc.img}")
+                            div.description
+                                p
+                                    |#{cc.description}
+        div.skills.col-md-5
+            each skillGroup in Object.keys(attr.SKILL_GROUPS)
+                h4.skill-group
+                    |#{skillGroup}
+                each skill in attr.SKILL_GROUPS[skillGroup]
+                    div.form-group.attribute
+                        div.col-md-3
+                            label(data-toggle="tooltip" title="#{skill.tooltip}" data-placement="right")
+                                | #{skill.name}&nbsp;
+                                small
+                                    | (#{skill.name.substr(0, 3)})
+                        div.col-md-9
+                            input(class="form-control skill-value #{skill.name.substr(0, 3)} basic" type="number"  value=0)
+                            input(class="form-control skill-value #{skill.name.substr(0, 3)} bonus-1" type="number"  value=0 disabled="disabled")
+                            input(class="form-control skill-value final" data-attr="#{skill.name.substr(0, 3)}" type="number"  disabled="disabled")
+                    br
+        div.preview.class-preview.col-md-3

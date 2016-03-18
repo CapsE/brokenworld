@@ -1,0 +1,40 @@
+//
+   Created by Lars on 10.03.2016.
+
+extends layout
+
+block content
+    script(src="/js/stepper.js")
+    script(src="/js/create-character.js")
+
+    div.stepper
+        div.content
+            div.step.text
+                | Hi there! So you want to create a character? That’s great! But first you should learn a bit about the “Broken World” and how to best create a character.
+                ul
+                    li
+                        a(href="/introduction" target="_blank")
+                            | Introduction to Broken World
+                | So you know about the basic stuff now huh? Okay let's move on then!
+            div.step.text
+                include text/pick-image.txt
+                ul
+                    li
+                        a(href="https://de.pinterest.com/search/pins/?q=Cyberpunk%20concept&rs=typed&0=Cyberpunk%7Ctyped&1=concept%7Ctyped" target="_blank")
+                            | Pinterest images
+                    li
+                        a(href="https://www.google.de/search?q=Cyberpunk+concept&espv=2&biw=1920&bih=955&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjtqrnOocvLAhULSJoKHVXxCawQ_AUIBigB" target="_blank")
+                            | Google images
+                | Pick an image now!
+                div.form-group
+                    input(type="text" class="form-control" id="img-url" placeholder="link to image")
+                | Tip: Your url should end in ".png" or ".jpg" or something similar
+            div.step
+                | Step 3
+        div.controls
+            button.prev.btn
+                | Previous
+            button.next.btn
+                | Next
+
+    img#character-img

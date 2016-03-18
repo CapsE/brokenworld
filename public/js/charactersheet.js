@@ -25,11 +25,12 @@ $(document).ready(function(){
 
     var appliedBoni = {};
     var $race = $(".race");
+    var $previewRace = $(".race-preview");
     $race.click(function(){
         $race.removeClass(".active");
-        $race.find(".detail").hide();
+        $previewRace.html("");
         $(this).addClass(".active");
-        $(this).find(".detail").show();
+        $previewRace.append($(this).find(".detail").clone(true, true).show());
         for(var k in appliedBoni){
             var field = $(".attribute-value.bonus-1." + k);
             field.val(parseInt(field.val()) + appliedBoni[k] * -1);

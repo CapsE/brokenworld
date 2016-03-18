@@ -20,6 +20,14 @@ router.get('/character-sheet', function(req, res){
   });
 });
 
+router.get("/create-character", function(req, res){
+  res.render('create-character', {title: 'Broken World'});
+});
+
+router.get("/introduction", function(req, res){
+  res.render('introduction', {title: 'Introduction'});
+});
+
 router.post('/values', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   var val = req.body.value;
