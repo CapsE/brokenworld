@@ -1,43 +1,40 @@
-var env_loader     = require('dotenv').load();
-var express       = require('express');
-var path          = require('path');
-var favicon       = require('serve-favicon');
-var logger        = require('morgan');
-var cookieParser  = require('cookie-parser');
-var bodyParser    = require('body-parser');
+var express = require('express');
+var path = require('path');
+var logger = require('morgan');
+var favicon = require('serve-favicon');
+var bodyParser = require('body-parser');
+var HTMLSync = require('html-sync');
 
-var mongodb       = require('./db');
-
-var routes = require('./routes/routes');
-
+var routes = require('./routes/index')(express, HTMLSync);
 var app = express();
 app.set('port', process.env.PORT || 3000);
-app.disable('etag');
-console.log("Listening on Port " + (process.env.PORT || 3000) );
+
+var http = require('http').createServer(app);
+
+http.listen(process.env.PORT || 3000, function(){
+  console.log("listening on " + (process.env.PORT || 3000));
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.ico')));
+// uncomment after placing your favicon in /public
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log("Error 404");
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
-
-app.use(function(req, res, next) {
-  req.headers['if-none-match'] = 'no-match-for-this';
-  next();
 });
 
 // error handlers
@@ -52,7 +49,6 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
-  app.locals.pretty = true;
 }
 
 // production error handler
@@ -65,6 +61,13 @@ app.use(function(err, req, res, next) {
   });
 });
 
-mongodb.connectDB();
+var io = require('socket.io')(http);
+var hs = new HTMLSync(io, {debug:false});
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  HTMLSync.setSocket(socket);
+});
 
 module.exports = app;

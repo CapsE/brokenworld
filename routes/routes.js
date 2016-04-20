@@ -21,7 +21,11 @@ router.get('/character-sheet', function(req, res){
 });
 
 router.get("/create-character", function(req, res){
-  res.render('create-character', {title: 'Broken World'});
+  mongodb.getClasses(function(classes){
+    mongodb.getRaces(function(races){
+      res.render('create-character', {title: 'Broken World', characterClasses: classes, characterRaces: races, attr:ATTRIBUTES});
+    });
+  });
 });
 
 router.get("/introduction", function(req, res){

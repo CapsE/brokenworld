@@ -6,6 +6,7 @@ extends layout
 block content
     script(src="/js/stepper.js")
     script(src="/js/create-character.js")
+    script(src="/js/charactersheet.js")
 
     div.stepper
         div.content
@@ -30,7 +31,44 @@ block content
                     input(type="text" class="form-control" id="img-url" placeholder="link to image")
                 | Tip: Your url should end in ".png" or ".jpg" or something similar
             div.step
-                | Step 3
+                | No matter if you found an image that represents you character perfectly or is just a general inspiration now it’s the time to think about your characters background and personality. Fill out the following fields real quick.
+                br
+                br
+                div.form-group
+                    label
+                        | Names
+                    br
+                    div.col-md-4
+                        input(type="text" class="form-control" id="firstname" placeholder="Firtname")
+                    div.col-md-4
+                        input(type="text" class="form-control" id="lastname" placeholder="Lastname")
+                    div.col-md-4
+                        input(type="text" class="form-control" id="nickname" placeholder="Nickname")
+                    br
+                    br
+                    br
+                    label
+                        | Personal background
+                    textarea(class="form-control" id="background" placeholder="")
+                    div.counter(data-for="background")
+                        | 0
+                    label
+                        | Personality
+                    textarea(class="form-control" id="personality" placeholder="")
+                    div.counter(data-for="personality")
+                        | 0
+                    label
+                        | Goals / Motivation
+                    textarea(class="form-control" id="motivation" placeholder="")
+                    div.counter(data-for="motivation")
+                        | 0
+                    label
+                        | Flaws
+                    textarea(class="form-control" id="flaws" placeholder="")
+                    div.counter(data-for="flaws")
+                        | 0
+            div.step
+                include attributes
         div.controls
             button.prev.btn
                 | Previous

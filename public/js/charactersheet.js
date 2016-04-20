@@ -15,7 +15,7 @@ $(document).ready(function(){
         $(".attribute-value.basic").each(function(){
             val += parseInt($(this).val());
         });
-        if(val != 30){
+        if(val != 24){
             $(".attribute-value.basic").css("color","#f0ad4e" );
         }else{
             $(".attribute-value.basic").css("color","#2c3e50" );
@@ -61,5 +61,18 @@ $(document).ready(function(){
             $(this).val(value);
         });
     }
+
+    $(".skill").each(function(){
+       var attr = $(this).data("attr");
+        $(".skills-" + attr).append($(this));
+    });
+
+    $(".attribute").mouseenter(function(){
+        $(".skills-" + $(this).data("name")).show();
+    });
+    $(".attribute").mouseout(function(){
+        $(".skill-wrapper").hide();
+    });
+
 });
 

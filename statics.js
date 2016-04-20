@@ -32,14 +32,6 @@ var ATTRIBUTES = {
         name: "Charisma",
         "tooltip": "How charming you are"
     },
-    Comprehension: {
-        name: "Comprehension",
-        "tooltip": "How good you can read people"
-    },
-    Stealthiness: {
-        name: "Stealthiness",
-        "tooltip": "How sneaky you are"
-    },
     Perception: {
         name: "Perception",
         "tooltip": "How aware you are of your surroundings"
@@ -102,7 +94,7 @@ var SKILLS = {
     Bargaining: {
         name: "Bargaining",
         tooltip: "How easily you can get a good deal",
-        attr: ATTRIBUTES.Comprehension
+        attr: ATTRIBUTES.Perception
     },
 
     Technology:{
@@ -133,7 +125,7 @@ var SKILLS = {
     Stealth:{
         name: "Stealth",
         tooltip: "How good you can move without beeing noticed",
-        attr: ATTRIBUTES.Intelligence
+        attr: ATTRIBUTES.Dexterity
     },
     Nature:{
         name: "Nature",

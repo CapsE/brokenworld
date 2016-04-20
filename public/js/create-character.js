@@ -27,5 +27,26 @@ $(window).load(function(){
 
     $("#character-img").load(function(){
         $(this).show();
-    })
+    });
+
+    var $counters = {};
+    $(".counter").each(function(){
+       $counters[$(this).data("for")] = $(this);
+    });
+
+    $("textarea").keyup(function(){
+        var $c = $counters[$(this).attr("id")];
+        var length = $(this).val().length;
+        $c.html(length);
+
+        if(length < 50 || length > 400){
+            $c.css("color", "red");
+        }else if(length < 140 || length > 250){
+            $c.css("color", "orange");
+        }else {
+            $c.css("color", "green");
+        }
+    });
+
+    console.log($counters);
 });

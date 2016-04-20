@@ -1,0 +1,35 @@
+//
+   Created by Lars on 19.03.2016.
+
+
+div.races
+    each race in characterRaces
+        div.choose
+        button.race.btn-primary(data-boni="#{JSON.stringify(race.boni)}" data-toggle="tooltip" title="#{race.description}")
+            | #{race.name}
+            div.detail(style="display:none")
+                img(src="#{race.img}")
+                div.description
+                    p
+                        |#{race.description}
+
+br
+div.attributes.form-group
+    each attribute in attr.ATTRIBUTES
+        div.attribute(data-name="#{attribute.name}")
+            div.col-md-3
+                label(data-toggle="tooltip" title="#{attribute.tooltip}" data-placement="right")
+                    |#{attribute.name}&nbsp;
+                    small
+                        |(#{attribute.name.substr(0,3)})
+            div.col-md-6
+                input(class="form-control attribute-value #{attribute.name.substr(0,3)} basic" type="number"  value=3)
+                input(class="form-control attribute-value #{attribute.name.substr(0,3)} bonus-1" type="number"  value=0 disabled="disabled")
+                input(class="form-control attribute-value final" data-attr="#{attribute.name.substr(0,3)}" type="number"  disabled="disabled")
+br
+div.skills
+    each attribute in attr.ATTRIBUTES
+        div(class="skills-#{attribute.name} skill-wrapper")
+    each skill in attr.SKILLS
+        div.skill(data-attr="#{skill.attr.name}" data-toggle="tooltip" title="#{skill.tooltip}")
+            | #{skill.name}

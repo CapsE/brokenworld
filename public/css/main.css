@@ -36,7 +36,6 @@ img{
 }
 
 .attribute{
-    width:auto;
     margin:4px;
 }
 
@@ -93,5 +92,14 @@ img{
     top:60px;
     right:0px;
     width:20%;
+    display:none;
+}
+
+.counter{
+    float:right;
+    font-size: 0.9em;
+}
+
+.skill-wrapper{
     display:none;
 }
